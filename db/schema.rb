@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20170119015012) do
   enable_extension "plpgsql"
 
   create_table "pool_versions", force: :cascade do |t|
-    t.integer  "booru_id",                            null: false
+    t.integer  "booru_id"
     t.integer  "pool_id",                             null: false
     t.integer  "post_ids",            default: [],    null: false, array: true
     t.integer  "added_post_ids",      default: [],    null: false, array: true
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20170119015012) do
   end
 
   create_table "post_versions", force: :cascade do |t|
-    t.integer  "booru_id",                                  null: false
+    t.integer  "booru_id"
     t.integer  "post_id",                                   null: false
     t.text     "tags",                                      null: false
     t.text     "added_tags",                default: [],    null: false, array: true
