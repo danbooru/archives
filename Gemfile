@@ -14,7 +14,3 @@ group :production do
   gem 'capistrano-bundler'
   gem 'whenever'
 end
-
-group :development do
-  gem 'foreman'
-end

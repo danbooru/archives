@@ -1,14 +1,11 @@
-FROM ruby:2.4.2-slim-stretch
-
-RUN echo "deb [trusted=yes] http://archive.debian.org/debian stretch main non-free contrib" > /etc/apt/sources.list
-RUN echo "deb-src [trusted=yes] http://archive.debian.org/debian stretch main non-free contrib" >> /etc/apt/sources.list
-RUN echo "deb [trusted=yes] http://archive.debian.org/debian-security stretch/updates main non-free contrib" >> /etc/apt/sources.list
+FROM ruby:3.4.4-slim
 
 LABEL archives=true
 ENV RAILS_ENV=production
 
-RUN apt-get update
-RUN apt-get -y install apt-utils build-essential automake libssl-dev libxml2-dev libxslt-dev sudo libreadline-dev memcached libmemcached-dev postgresql-client libpq-dev
+RUN apt update
+RUN apt install -y build-essential libssl-dev libxml2-dev libxslt-dev sudo libreadline-dev \
+                   memcached libmemcached-dev libyaml-dev libpq-dev libsodium-dev libglib2.0-dev
 
 RUN useradd -ms /bin/bash danbooru -u 1000
 RUN mkdir /app
@@ -22,7 +19,7 @@ RUN chown danbooru:danbooru /var/run/danboorus /var/log/archives
 USER danbooru
 
 RUN echo 'gem: --no-document' > ~/.gemrc
-RUN gem install bundler -v 2.3.27
+RUN gem install bundler:2.6.9
 
 WORKDIR /app
 
