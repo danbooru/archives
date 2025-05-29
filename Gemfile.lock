@@ -151,6 +151,7 @@ GEM
       concurrent-ruby (~> 1.0)
     uri (1.0.3)
     useragent (0.16.11)
+    webrick (1.9.1)
     whenever (1.0.0)
       chronic (>= 0.6.3)
     zeitwerk (2.7.3)
@@ -168,6 +169,7 @@ DEPENDENCIES
   dotenv
   pg
   standalone_migrations
+  webrick
   whenever
 
 BUNDLED WITH
