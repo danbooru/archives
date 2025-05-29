@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 20170119015012) do
     t.integer  "added_post_ids",      default: [],    null: false, array: true
     t.integer  "removed_post_ids",    default: [],    null: false, array: true
     t.integer  "updater_id"
-    t.inet     "updater_ip_addr"
     t.text     "description"
     t.boolean  "description_changed", default: false, null: false
     t.text     "name"
@@ -36,7 +35,6 @@ ActiveRecord::Schema.define(version: 20170119015012) do
     t.string   "category"
     t.index ["booru_id", "pool_id"], name: "index_pool_versions_on_pool_id", using: :btree
     t.index ["booru_id", "updater_id"], name: "index_pool_versions_on_updater_id", using: :btree
-    t.index ["booru_id", "updater_ip_addr"], name: "index_pool_versions_on_updater_ip_addr", using: :btree
   end
 
   create_table "post_versions", force: :cascade do |t|
@@ -46,7 +44,6 @@ ActiveRecord::Schema.define(version: 20170119015012) do
     t.text     "added_tags",                default: [],    null: false, array: true
     t.text     "removed_tags",              default: [],    null: false, array: true
     t.integer  "updater_id"
-    t.inet     "updater_ip_addr",                           null: false
     t.datetime "updated_at",                                null: false
     t.string   "rating",          limit: 1
     t.boolean  "rating_changed",            default: false, null: false
@@ -58,7 +55,6 @@ ActiveRecord::Schema.define(version: 20170119015012) do
     t.index ["booru_id", "post_id"], name: "index_post_versions_on_booru_id_and_post_id", using: :btree
     t.index ["booru_id", "updated_at"], name: "index_post_versions_on_booru_id_and_updated_at", using: :btree
     t.index ["booru_id", "updater_id"], name: "index_post_versions_on_booru_id_and_updater_id", using: :btree
-    t.index ["booru_id", "updater_ip_addr"], name: "index_post_versions_on_booru_id_and_updater_ip_addr", using: :btree
   end
 
 end

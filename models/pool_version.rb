@@ -2,6 +2,8 @@ require 'active_record'
 require 'active_support/core_ext/numeric/time'
 
 class PoolVersion < ActiveRecord::Base
+  self.ignored_columns = [:updater_ip_addr]
+
   establish_connection(
     adapter: "postgresql",
     host: ENV["POSTGRES_HOST"],
@@ -48,7 +50,6 @@ class PoolVersion < ActiveRecord::Base
       added_post_ids: added_post_ids,
       removed_post_ids: removed_post_ids,
       updater_id: json["updater_id"],
-      updater_ip_addr: json["updater_ip_addr"],
       description: json["description"],
       description_changed: description_changed,
       name: json["name"],
@@ -57,7 +58,7 @@ class PoolVersion < ActiveRecord::Base
       updated_at: updated_at,
       is_active: json["is_active"],
       is_deleted: json["is_deleted"],
-      category: json["category"]      
+      category: json["category"]
     }
 
     ActiveRecord::Base.record_timestamps = false

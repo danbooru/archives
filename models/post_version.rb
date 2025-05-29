@@ -2,6 +2,8 @@ require 'active_record'
 require 'active_support/core_ext/numeric/time'
 
 class PostVersion < ActiveRecord::Base
+  self.ignored_columns = [:updater_ip_addr]
+
   establish_connection(
     adapter: "postgresql",
     host: ENV["POSTGRES_HOST"],
@@ -49,7 +51,6 @@ class PostVersion < ActiveRecord::Base
       added_tags: added_tags,
       removed_tags: removed_tags,
       updater_id: json["updater_id"],
-      updater_ip_addr: json["updater_ip_addr"],
       updated_at: updated_at,
       rating: json["rating"],
       rating_changed: rating_changed,
