@@ -4,8 +4,7 @@ LABEL archives=true
 ENV RAILS_ENV=production
 
 RUN apt update
-RUN apt install -y build-essential libssl-dev libxml2-dev libxslt-dev sudo libreadline-dev \
-                   memcached libmemcached-dev libyaml-dev libpq-dev libsodium-dev libglib2.0-dev
+RUN apt install -y build-essential libxml2-dev libyaml-dev libpq-dev
 
 RUN useradd -ms /bin/bash danbooru -u 1000
 RUN mkdir /app
