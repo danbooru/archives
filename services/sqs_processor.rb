@@ -31,19 +31,8 @@ require "pool_version"
 require "post_version"
 
 $running = true
-$options = {
-  logfile: "/var/log/archives/sqs_processor.log"
-}
 
-OptionParser.new do |opts|
-  opts.on("--logfile=LOGFILE") do |logfile|
-    $options[:logfile] = logfile
-  end
-end.parse!
-
-LOGFILE = $options[:logfile] == "stdout" ? STDOUT : File.open($options[:logfile], "a")
-LOGFILE.sync = true
-LOGGER = Logger.new(LOGFILE, 0)
+LOGGER = Logger.new($stderr)
 Aws.config.update(
   region: ENV["AMAZON_SQS_REGION"],
   credentials: Aws::Credentials.new(
@@ -60,7 +49,7 @@ end
 
 def process_queue(poller, logger)
   logger.info "Starting"
-  
+
   poller.before_request do
     unless $running
       throw :stop_polling
@@ -86,7 +75,7 @@ def process_queue(poller, logger)
           logger.info("unknown command: #{command}")
         end
       end
-      
+
     rescue Interrupt
       exit(0)
 
