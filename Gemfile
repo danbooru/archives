@@ -8,10 +8,3 @@ gem "dotenv"
 gem "pg"
 gem "standalone_migrations"
 gem "webrick"
-
-group :production do
-	gem "capistrano"
-  gem 'capistrano-rbenv'
-  gem 'capistrano-bundler'
-  gem 'whenever'
-end
