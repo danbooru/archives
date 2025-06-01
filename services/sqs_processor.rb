@@ -34,14 +34,14 @@ $running = true
 
 LOGGER = Logger.new($stderr)
 Aws.config.update(
-  region: ENV["AMAZON_SQS_REGION"],
+  region: ENV["DANBOORU_AWS_SQS_REGION"],
   credentials: Aws::Credentials.new(
-    ENV["AMAZON_KEY"],
-    ENV["AMAZON_SECRET"]
+    ENV["DANBOORU_AWS_ACCESS_KEY_ID"],
+    ENV["DANBOORU_AWS_SECRET_ACCESS_KEY"]
   )
 )
 SQS = Aws::SQS::Client.new
-QUEUE = Aws::SQS::QueuePoller.new(ENV["SQS_ARCHIVES_URL"], client: SQS)
+QUEUE = Aws::SQS::QueuePoller.new(ENV["DANBOORU_AWS_SQS_ARCHIVES_URL"], client: SQS)
 
 Signal.trap("TERM") do
   $running = false
